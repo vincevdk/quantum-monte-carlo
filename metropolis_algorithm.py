@@ -10,7 +10,7 @@ def metropolis(function, N):
     x[0] = 0.1
     h = 1/10
     t = 0
-    alpha = 0.5
+
     for i in range(len(x)):
         x_trial = np.random.uniform(-h/2, h/2)
         x_trial = x[i-1] + x_trial
@@ -27,7 +27,7 @@ def metropolis(function, N):
             else:
                 x[i] = x[i-1]
     acceptance_ratio = t/len(x)
-    print(acceptance_ratio)
+    print(acceptance_ratio, 'acceptance ratio')
 
     return(x)
 

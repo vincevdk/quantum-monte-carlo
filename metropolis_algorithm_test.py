@@ -5,15 +5,15 @@ from metropolis_algorithm import metropolis
 
 
 def example_1d_oscillator():
-    f= lambda x:np.exp(-2*0.5*x**2)
-    integral = integrate.quad(f, -1000, 1000)
-    p_r = lambda r:np.exp(-2*0.5*r**2)/integral[0]
+    f= lambda x:np.exp(-0.5*x**2)
+    p_r = lambda r:(np.exp(-2*0.5*r**2))/(np.sqrt(np.pi))
 
-    density = metropolis(f,100000)
+    density = metropolis(f,400000)
     plt.figure()
-    plt.title(r'$\rho(x) = \frac{e^{-0.5\alpha x^2}}{\int e^{-\alpha x^2} dx}$') 
-    count, bins, ignored = plt.hist(density[1000:], 30, density=True)
+    plt.title(r'$\rho(x) = \frac{e^{-2\alpha x^2}}{\int e^{-2\alpha x^2} dx}$') 
+    count, bins, ignored = plt.hist(density[1000:], 100, density=True)
     plt.plot(bins, p_r(bins),linewidth=2, color='r')
+    plt.show()
 
 def example_helium():
     g = lambda x:np.exp(-2)*np.exp(-4)*np.exp(2/(2*(1+x*2)))
@@ -28,6 +28,6 @@ def example_helium():
 
 if __name__ == '__main__':
     example_1d_oscillator()
-    example_helium()
+#    example_helium()
     plt.show()
 
