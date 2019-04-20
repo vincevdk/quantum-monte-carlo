@@ -2,7 +2,7 @@ import numpy as np
 from QMCP.functions import vmc
 import matplotlib.pyplot as plt
 
-def trial_wave_function(R, alpha):
+def trial_wave_function(alpha, R):
     return(np.exp(- alpha * R**2))
 
 def E_loc(alpha, R):

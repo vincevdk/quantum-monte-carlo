@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import integrate
-from metropolis_algorithm import metropolis
+from QMCP.functions import metropolis
 
 
 def example_1d_oscillator():
     f= lambda x:np.exp(-0.5*x**2)
     p_r = lambda r:(np.exp(-2*0.5*r**2))/(np.sqrt(np.pi))
 
-    density = metropolis(f,400000)
+    density = metropolis(f,30000,3)
     plt.figure()
     plt.title(r'$\rho(x) = \frac{e^{-2\alpha x^2}}{\int e^{-2\alpha x^2} dx}$') 
     count, bins, ignored = plt.hist(density[1000:], 100, density=True)
