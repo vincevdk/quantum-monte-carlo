@@ -1,5 +1,5 @@
 import numpy as np
-from QMCP.functions import metropolis
+from QMCP.functions import one_d_metropolis
 
 def expectation_value(E_loc):
     E = (1/len(E_loc))*np.sum(E_loc)
