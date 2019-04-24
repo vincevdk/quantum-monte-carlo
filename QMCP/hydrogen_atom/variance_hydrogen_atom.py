@@ -8,8 +8,9 @@ def trial_wave_function(alpha, R):
 def E_loc(alpha, R):
     return(-1/R-alpha*(alpha-2/R)/2)
 
+
 alpha = np.arange(0.8, 1.2, 0.1)
-dimension = 1
+dimension = 3
 E_ground, variance = (vmc(alpha,trial_wave_function,E_loc, dimension))
 
 print(E_ground,'E_ground')

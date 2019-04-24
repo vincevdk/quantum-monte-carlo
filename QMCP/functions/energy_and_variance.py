@@ -18,9 +18,9 @@ def vmc(alpha, trial_function, E_loc, dimension = None):
 
         f = lambda R: trial_function(alpha[i],R)
         if dimension != None:
-            prob_dens = three_d_metropolis(f,100000,1)
+            prob_dens = three_d_metropolis(f,30000,400)
         else:
-            prob_dens = one_d_metropolis(f,30000,400)
+            prob_dens = one_d_metropolis(f,100000,400)
         
         E = E_loc(alpha[i], prob_dens)
         E_ground[i] = expectation_value(E)
