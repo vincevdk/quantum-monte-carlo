@@ -22,3 +22,14 @@ plt.figure()
 plt.plot(alpha, variance)
 plt.title('variance')
 plt.show()
+
+import numpy as np
+import matplotlib.pyplot as plt
+from QMCP.functions import minimization_alpha
+
+## variational quantum monte carlo simulation                                                
+## initialize                                                                                
+
+N = 10000
+
+
