@@ -17,7 +17,7 @@ def derivative_E(alpha,function, E_loc, dimension, der_ln_twf):
     deriv_E = 2*(expectation_value(E*der_ln_twf(prob_dens) - E_ground*expectation_value(der_ln_twf(prob_dens))))
     return(deriv_E, E_ground)
 
-def minimization_alpha(trial_function, E_loc,der_ln_twf, dimension = None):
+def minimization_alpha(trial_function, E_loc, der_ln_twf, dimension = None):
     """
     Finds the alpha for which the local energy is minimal, using a simple 
     damped steepest decent method.
