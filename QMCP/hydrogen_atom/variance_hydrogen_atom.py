@@ -1,19 +1,8 @@
 import numpy as np
 from QMCP.functions import vmc
 import matplotlib.pyplot as plt
+from QMCP.hydrogen_atom import Hydrogen_atom
 
-class Hydrogen_atom:
-     def __init__(self, dimension):
-        self.dimension = dimension
-
-     def trial_wave_function(self,alpha, R):
-         return(np.exp(- alpha * R))
-
-     def E_loc(self, alpha, R):
-         return(-1/R-alpha*(alpha-2/R)/2)
-
-     def der_ln_twf(self, R):
-          return(-R)
 
 hydrogen = Hydrogen_atom(3)
 alpha = np.arange(0.8, 1.2, 0.1)

@@ -1,71 +1,16 @@
 import numpy as np
 from QMCP.functions import vmc
 import matplotlib.pyplot as plt
+from QMCP.harmonic_oscillator import Oscillator
+alpha = np.arange(0.1, 2, 0.05)
+oscillator = Oscillator(1)
+E_ground, variance = (vmc(alpha, oscillator))
+print(E_ground)
+plt.figure()
+plt.plot(alpha, E_ground)
+plt.title('ground state energy')
 
-class Oscillator:
-    def __init__(self, dimension):
-        self.dimension = dimension
-        
-
-    def trial_wave_function(self, alpha, R):
-        """
-        parametrised (trial)wave function of a quantum system
-
-        Parameters
-        ----------
-        R: int
-           variable input, position of the oscillator
-        alpha: 
-           variable input, 
-        Results
-        -------   
-        np.exp(- alpha * R**2): function with two variables
-    """
-
-        return(np.exp(- alpha * R**2))
-
-    def E_loc(self,alpha, R):
-        """
-        Local energy is a function that depends on the positions of the particles
-        and alpha. It is constant if ψT is the exact eigenfunction of 
-        the Hamiltonian.
-        Parameters
-        ----------
-        alpha: int
-            variable input, is being changed to find the minimal energy
-        R: int
-           variable input, position of the oscillator
-        Results
-        -------
-        E_loc: function with two variables
-        """
-
-        return(alpha + (R**2)*(0.5 - 2*alpha**2))
-
-    def der_ln_twf(self,R):
-        """alpha derivative of the natural logarithm of the trial wave function, 
-        needed to calculate the alpha derivative of the energy
-        Parameters
-        ----------
-        R: int
-            variable input, position of the oscillator
-    
-        Results
-        -------
-        -R**2: function with one variable
-        """
-        return(-R**2)
-if __name__ == "__main__":
-    alpha = np.arange(0.1, 2, 0.05)
-    oscillator = Oscillator(1)
-    E_ground, variance = (vmc(alpha, oscillator))
-
-    print(E_ground)
-    plt.figure()
-    plt.plot(alpha, E_ground)
-    plt.title('ground state energy')
-
-    plt.figure()
-    plt.plot(alpha, variance)
-    plt.title('variance')
-    plt.show()
+plt.figure()
+plt.plot(alpha, variance)
+plt.title('variance')
+plt.show()

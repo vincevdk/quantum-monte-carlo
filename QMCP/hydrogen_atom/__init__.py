@@ -1,1 +1,1 @@
-from .variance_hydrogen_atom import Hydrogen_atom
+from .hydrogen import Hydrogen_atom

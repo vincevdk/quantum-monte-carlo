@@ -1,1 +1,1 @@
-from .variance_oscillator import Oscillator
+from .oscillator import Oscillator
