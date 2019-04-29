@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from QMCP.functions import minimization_alpha
+from QMCP.harmonic_oscillator import Oscillator
 
 def trial_wave_function(R, alpha):
     """
@@ -49,7 +50,10 @@ def der_ln_twf(R):
     """
     return(-R**2)
 
-alpha = minimization_alpha(trial_wave_function, E_loc, der_ln_twf)
+
+oscillator = Oscillator(1)
+alpha = minimization_alpha(oscillator)
+
 steps = np.linspace(0,len(alpha),len(alpha))
 
 plt.title('minimization of alpha')

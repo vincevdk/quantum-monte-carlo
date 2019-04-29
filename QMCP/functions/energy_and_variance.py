@@ -10,20 +10,20 @@ def variance(E_loc):
     var = (1/len(E_loc))*np.sum(E_loc**2) - ((1/len(E_loc))*np.sum(E_loc))**2
     return(var)
 
-def vmc(alpha, trial_function, E_loc, dimension = None):
+def vmc(alpha, quantum_system):
 
     E_ground = np.zeros(len(alpha))
     var = np.zeros(len(alpha))
     for i in range(len(alpha)):
 
-        f = lambda R: trial_function(alpha[i],R)
-        if dimension != None:
+        f = lambda R: quantum_system.trial_wave_function(alpha[i],R)
+        if quantum_system.dimension != 1:
             prob_dens = three_d_metropolis(f,30000,400)
         else:
             prob_dens = one_d_metropolis(f,30000,400)
-        
-        E = E_loc(alpha[i], prob_dens)
+
+        E = quantum_system.E_loc(alpha[i], prob_dens)
         E_ground[i] = expectation_value(E)
         var[i] = variance(E)
-        
+
     return(E_ground, var)

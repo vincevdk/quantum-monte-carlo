@@ -2,23 +2,23 @@ import numpy as np
 from QMCP.functions import vmc
 import matplotlib.pyplot as plt
 
-#class quantum_system:
-#    def __init__(self, trial_wave_function):
-#        self.trial_wave_function = trial_wave_function
-#        self.E_loc = E_loc
-#        self.der_ln_twf = der_ln_twf
+class Hydrogen_atom:
+     def __init__(self, dimension):
+        self.dimension = dimension
 
-def trial_wave_function(alpha, R):
-    return(np.exp(- alpha * R))
+     def trial_wave_function(self,alpha, R):
+         return(np.exp(- alpha * R))
 
-def E_loc(alpha, R):
-    return(-1/R-alpha*(alpha-2/R)/2)
+     def E_loc(self, alpha, R):
+         return(-1/R-alpha*(alpha-2/R)/2)
 
-#hydrogen = quantum_system(lambda alpha,R:np.exp(- alpha * R), lambda alpha,R: -1/R-alpha*(alpha-2/R)/2, lambda R:-R)
+     def der_ln_twf(self, R):
+          return(-R)
+
+hydrogen = Hydrogen_atom(3)
 alpha = np.arange(0.8, 1.2, 0.1)
-dimension = 3
 
-E_ground, variance = (vmc(alpha,trial_wave_function,E_loc, dimension))
+E_ground, variance = (vmc(alpha, hydrogen))
 
 print(E_ground,'E_ground')
 plt.figure()

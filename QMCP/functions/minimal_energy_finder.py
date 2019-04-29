@@ -5,19 +5,19 @@ def expectation_value(E_loc):
     E = (1/len(E_loc))*np.sum(E_loc)
     return(E)
 
-def derivative_E(alpha,function, E_loc, dimension, der_ln_twf):
-    f = lambda R: function(R,alpha)
-    if dimension == None:
+def derivative_E(alpha, quantum_system):
+    f = lambda R: quantum_system.trial_wave_function(alpha, R)
+    if quantum_system.dimension == 1:
         prob_dens = one_d_metropolis(f,30000,400)
     else:
         prob_dens = three_d_metropolis(f,30000,400)
 
-    E = E_loc(alpha, prob_dens)
+    E = quantum_system.E_loc(alpha, prob_dens)
     E_ground = expectation_value(E)
-    deriv_E = 2*(expectation_value(E*der_ln_twf(prob_dens) - E_ground*expectation_value(der_ln_twf(prob_dens))))
+    deriv_E = 2*(expectation_value(E*quantum_system.der_ln_twf(prob_dens) - E_ground*expectation_value(quantum_system.der_ln_twf(prob_dens))))
     return(deriv_E, E_ground)
 
-def minimization_alpha(trial_function, E_loc, der_ln_twf, dimension = None):
+def minimization_alpha(quantum_system):
     """
     Finds the alpha for which the local energy is minimal, using a simple 
     damped steepest decent method.
@@ -53,7 +53,7 @@ def minimization_alpha(trial_function, E_loc, der_ln_twf, dimension = None):
 
     while abs(difference) >= tol and i < max_it:
         keep = alpha_min
-        der_E, E_ground = derivative_E(alpha_min, trial_function, E_loc, dimension, der_ln_twf)
+        der_E, E_ground = derivative_E(alpha_min, quantum_system)
         alpha_min = alpha_min - gamma * der_E
         alpha_array.append(alpha_min)
         difference = alpha_min - keep
