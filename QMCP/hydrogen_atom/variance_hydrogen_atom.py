@@ -7,7 +7,7 @@ from QMCP.hydrogen_atom import Hydrogen_atom
 hydrogen = Hydrogen_atom(3)
 alpha = np.arange(0.8, 1.2, 0.1)
 
-E_ground, variance = (vmc(alpha, hydrogen))
+E_ground, E_ground_error, variance = (vmc(alpha, hydrogen))
 
 print(E_ground,'E_ground')
 plt.figure()

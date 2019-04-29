@@ -1,5 +1,6 @@
 import numpy as np
 from QMCP.functions import one_d_metropolis, three_d_metropolis
+from QMCP.functions import bootstrap
 
 def expectation_value(E_loc):
     print(E_loc,'E_loc')
@@ -13,6 +14,7 @@ def variance(E_loc):
 def vmc(alpha, quantum_system):
 
     E_ground = np.zeros(len(alpha))
+    E_ground_error = np.zeros(len(alpha))
     var = np.zeros(len(alpha))
     for i in range(len(alpha)):
 
@@ -23,7 +25,11 @@ def vmc(alpha, quantum_system):
             prob_dens = one_d_metropolis(f,30000,400)
 
         E = quantum_system.E_loc(alpha[i], prob_dens)
+        E_ground_error[i] = bootstrap(E[0:1000],100)
         E_ground[i] = expectation_value(E)
         var[i] = variance(E)
 
-    return(E_ground, var)
+    return(E_ground, E_ground_error, var)
+
+
+
