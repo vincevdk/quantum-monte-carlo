@@ -1,5 +1,5 @@
 import numpy as np
-from QMCP.functions import one_d_metropolis, three_d_metropolis
+from QMCP.functions import one_d_metropolis, three_d_metropolis, six_d_metropolis
 from QMCP.functions import bootstrap
 
 def expectation_value(E_loc):
@@ -19,11 +19,13 @@ def vmc(alpha, quantum_system):
     for i in range(len(alpha)):
 
         f = lambda R: quantum_system.trial_wave_function(alpha[i],R)
-        if quantum_system.dimension != 1:
+        if quantum_system.dimension == 1: 
+            prob_dens = one_d_metropolis(f,30000,400)   
+        elif quantum_system.dimension == 3:
             prob_dens = three_d_metropolis(f,30000,400)
         else:
-            prob_dens = one_d_metropolis(f,30000,400)
-
+            prob_dens = six_d_metropolis(f,30000,400)
+            
         E = quantum_system.E_loc(alpha[i], prob_dens)
         E_ground_error[i] = bootstrap(E[0:1000],100)
         E_ground[i] = expectation_value(E)
