@@ -17,3 +17,4 @@ def metropolis(function, N, n_walkers):
     return(rn)
 
 
+

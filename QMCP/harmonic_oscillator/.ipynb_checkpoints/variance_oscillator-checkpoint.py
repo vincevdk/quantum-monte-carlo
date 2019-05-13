@@ -6,7 +6,6 @@ from QMCP.functions import bootstrap
 
 alpha = np.arange(0.1, 2, 0.05)
 oscillator = Oscillator(1)
-dim = oscillator.dimension
 E_ground, E_ground_error, variance = (vmc(alpha, oscillator))
 
 print(E_ground)
