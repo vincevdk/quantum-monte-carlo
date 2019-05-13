@@ -6,6 +6,7 @@ from QMCP.helium_atom import Helium_atom
 
 alpha = np.linspace(0.05, 0.25, 6)
 helium_atom = Helium_atom(6)
+dim = helium_atom.dimension
 E_ground, E_ground_error, variance = vmc(alpha, helium_atom)
 
 print(E_ground)

@@ -4,7 +4,6 @@ from QMCP.functions import minimization_alpha
 from QMCP.harmonic_oscillator import Oscillator
 
 oscillator = Oscillator(1)
-dim = oscillator.dimension
 alpha = minimization_alpha(oscillator)
 
 steps = np.linspace(0,len(alpha),len(alpha))
