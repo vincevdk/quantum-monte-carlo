@@ -34,5 +34,19 @@ def three_d_metropolis(function, N, n_walkers = 1):
     x = np.where(abs(x)<0.005, 0.1 , x)
     return(x)
 
+def six_d_metropolis(function, N, n_walkers):
+    rn = np.zeros((6, N, n_walkers))
+    r = np.random.randn(6, n_walkers)
+    
+    for i in range(N):
+        r_trial = r + (0.1*np.random.randn(6, n_walkers))
+        ratio = (function(r_trial) / function(r))**2
+        eta = np.random.uniform(0,1,(6,n_walkers))
+        rn[:,i,:] = np.where(ratio >= 1, r_trial, (np.where(eta < ratio, r_trial, r)))
+        r = np.where(ratio >= 1, r_trial, (np.where(eta < ratio, r_trial, r)))
+    rn = rn[:,4000:,:]
+
+    return(rn)
+
 
 
