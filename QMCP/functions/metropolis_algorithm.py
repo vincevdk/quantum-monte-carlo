@@ -14,6 +14,7 @@ def one_d_metropolis(function, N, n_walkers = 1):
         eta = np.random.uniform(0,1,size = n_walkers) 
         x[i] = np.where(r >= 1, x_trial, (np.where(eta < r, x_trial, x[i-1])))
 
+#    x = np.reshape(x[4000:])    
     x = np.reshape(x[4000:], n_walkers*N - (n_walkers * 4000))
     return(x)
 
@@ -29,7 +30,8 @@ def three_d_metropolis(function, N, n_walkers = 1):
         eta = np.random.uniform(0,1,size = n_walkers)
         x[i] = np.where(r >= 1, x_trial, (np.where(eta < r, x_trial, x[i-1])))
         displacement = np.where(r>=1, trial_displacement,(np.where(eta < r, trial_displacement, displacement)))
-        
+ 
+#    x = np.reshape(x[:,4000:,:])
     x = np.reshape(x[4000:], n_walkers*N - (n_walkers * 4000))
     x = np.where(abs(x)<0.005, 0.1 , x)
     return(x)

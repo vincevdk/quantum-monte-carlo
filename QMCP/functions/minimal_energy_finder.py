@@ -48,7 +48,7 @@ def minimization_alpha(quantum_system):
     gamma = 0.1
     tol = 0.0001
     max_it = 1000
-    alpha_min = 1.2
+    alpha_min = 0.20
     difference = 1.2
     i = 0
     E_ground = []

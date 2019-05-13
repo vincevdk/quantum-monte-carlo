@@ -18,7 +18,7 @@ def select_random_set(data_points, n_iterations):
     """
     random_data_points = np.random.choice(data_points, 
                                           size = (n_iterations, 
-                                                  len(data_points)))
+                                                  1000))
     return(random_data_points)
 
 def calculate_standard_deviation(average_random_set, n_iterations):
@@ -64,8 +64,17 @@ def bootstrap(N_data_points, n_iterations):
     """
 
     random_set = select_random_set(N_data_points, n_iterations)
-    average_random_set = np.sum(random_set, axis = 1)/len(N_data_points)
-    standard_deviation = calculate_standard_deviation(average_random_set,
-                                                      n_iterations)
-    return(standard_deviation)
+    var_vec = variance(random_set)
+    var_average = np.sum(var_vec)/n_iterations
+    var_standard_deviation = calculate_standard_deviation(var_vec, n_iterations)
 
+    average_random_set = np.sum(random_set, axis = 1)/len(N_data_points)
+    
+    energy_standard_deviation = calculate_standard_deviation(average_random_set,
+                                                      n_iterations)
+    return(energy_standard_deviation, var_average, var_standard_deviation)
+
+def variance(E_loc):
+    var = (1/len(E_loc))*np.sum(E_loc**2,axis = 1) - ((1/len(E_loc))*np.sum(E_loc, axis = 1))**2
+    print(var.shape,'shape variance')
+    return(var)
