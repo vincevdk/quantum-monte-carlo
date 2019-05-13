@@ -39,7 +39,7 @@ class Hydrogen_atom:
          """
          return(-1/R-alpha*(alpha-2/R)/2)
 
-     def der_ln_twf(self, R):
+     def der_ln_twf(self, alpha,bR):
          """alpha derivative of the natural logarithm of the trial wave function, 
          needed to calculate the alpha derivative of the energy
          Parameters

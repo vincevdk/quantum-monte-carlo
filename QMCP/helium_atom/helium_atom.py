@@ -23,9 +23,9 @@ class Helium_atom:
         -------   
         trial_wave_function: function with three variables
         """      
-        r1 = np.linalg.norm(r[:3,:], axis = 0)
-        r2 = np.linalg.norm(r[3:,:], axis = 0)
-        r12 = np.linalg.norm(r[:3,:]-r[3:,:], axis = 0)
+        r1 = np.linalg.norm(r[:3], axis = 0)
+        r2 = np.linalg.norm(r[3:], axis = 0)
+        r12 = np.linalg.norm(r[:3]-r[3:], axis = 0)
         trial_wave = np.exp(-2*r1 - 2*r2 + r12/(2*(1+alpha*r12)))
         return(trial_wave)
 
@@ -48,13 +48,14 @@ class Helium_atom:
          -------
          E_loc: function with two variables
         """  
-        r1_unit = r[:3,:,:] / np.linalg.norm(r[:3,:,:], axis = 0)
+        r1_unit = r[:3,:] / np.linalg.norm(r[:3,:], axis = 0)
         
-        r2_unit = r[3:,:,:] / np.linalg.norm(r[3:,:,:], axis = 0)
+        r2_unit = r[3:,:] / np.linalg.norm(r[3:,:], axis = 0)
         r12_unit = r1_unit - r2_unit
-        r12 = np.linalg.norm(r[:3,:,:] - r[3:,:,:], axis = 0)
-        E_loc = -4 + np.sum(r12_unit * (r[:3,:,:] - r[3:,:,:]), axis = 0) * 1/(r12*(1+alpha*r12)**2) - 1/(r12*(1+alpha*r12)**3) - 1/(4*(1+alpha*r12)**4) + 1/r12
-        #E_loc = np.reshape(E_loc, E_loc.shape[0]*E_loc.shape[1])
+        r12 = np.linalg.norm(r[:3,:] - r[3:,:], axis = 0)
+        E_loc = -4 + np.sum(r12_unit * (r[:3,:] - r[3:,:]), axis = 0) * 1/(r12*(1+alpha*r12)**2) - 1/(r12*(1+alpha*r12)**3) - 1/(4*(1+alpha*r12)**4) + 1/r12
+        print(E_loc.shape,'shape')
+
         return(E_loc)
     
     def der_ln_twf(self, alpha, r):

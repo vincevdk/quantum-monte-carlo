@@ -27,6 +27,7 @@ def vmc(alpha, quantum_system):
             prob_dens = six_d_metropolis(f,30000,400)
             
         E = quantum_system.E_loc(alpha[i], prob_dens)
+
         E_ground_error[i] = bootstrap(E[0:1000],100)
         E_ground[i] = expectation_value(E)
         var[i] = variance(E)

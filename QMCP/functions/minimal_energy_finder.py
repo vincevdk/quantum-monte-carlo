@@ -1,5 +1,5 @@
 import numpy as np
-from QMCP.functions import one_d_metropolis, three_d_metropolis
+from QMCP.functions import one_d_metropolis, three_d_metropolis, six_d_metropolis
 
 def expectation_value(E_loc):
     E = (1/len(E_loc))*np.sum(E_loc)
@@ -9,12 +9,16 @@ def derivative_E(alpha, quantum_system):
     f = lambda R: quantum_system.trial_wave_function(alpha, R)
     if quantum_system.dimension == 1:
         prob_dens = one_d_metropolis(f,30000,400)
-    else:
+
+    elif quantum_system.dimension == 3:
         prob_dens = three_d_metropolis(f,30000,400)
+
+    else:
+        prob_dens =six_d_metropolis(f,30000,400)
 
     E = quantum_system.E_loc(alpha, prob_dens)
     E_ground = expectation_value(E)
-    deriv_E = 2*(expectation_value(E*quantum_system.der_ln_twf(prob_dens) - E_ground*expectation_value(quantum_system.der_ln_twf(prob_dens))))
+    deriv_E = 2*(expectation_value(E*quantum_system.der_ln_twf(alpha, prob_dens) - E_ground*expectation_value(quantum_system.der_ln_twf(alpha,prob_dens))))
     return(deriv_E, E_ground)
 
 def minimization_alpha(quantum_system):

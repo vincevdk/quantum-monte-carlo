@@ -44,7 +44,8 @@ def six_d_metropolis(function, N, n_walkers):
         eta = np.random.uniform(0,1,(6,n_walkers))
         rn[:,i,:] = np.where(ratio >= 1, r_trial, (np.where(eta < ratio, r_trial, r)))
         r = np.where(ratio >= 1, r_trial, (np.where(eta < ratio, r_trial, r)))
-    rn = rn[:,4000:,:]
+
+    rn = np.reshape(rn[:,4000:,:], (6,n_walkers*N - (n_walkers * 4000)))
 
     return(rn)
 

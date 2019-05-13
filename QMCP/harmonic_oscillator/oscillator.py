@@ -40,7 +40,7 @@ class Oscillator:
 
         return(alpha + (R**2)*(0.5 - 2*alpha**2))
 
-    def der_ln_twf(self,R):
+    def der_ln_twf(self,alpha,R):
         """alpha derivative of the natural logarithm of the trial wave function, 
         needed to calculate the alpha derivative of the energy
         Parameters
