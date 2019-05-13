@@ -1,4 +1,4 @@
-from .metropolis_algorithm import one_d_metropolis, three_d_metropolis
+from .metropolis_algorithm import one_d_metropolis, three_d_metropolis, six_d_metropolis
 from .minimal_energy_finder import (derivative_E, 
                                     minimization_alpha, 
                                     expectation_value)
