@@ -55,4 +55,4 @@ class Hydrogen_atom:
          -------
          -R: function with one variable
         """
-        return(np.linalg.norm(r, axis = 0))
+        return(-np.linalg.norm(r, axis = 0))

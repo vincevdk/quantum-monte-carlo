@@ -7,7 +7,7 @@ def expectation_value(E_loc):
 
 def derivative_E(alpha, quantum_system):
     f = lambda R: quantum_system.trial_wave_function(alpha, R)
-    prob_dens = metropolis(f,30000,40)
+    prob_dens = metropolis(f,30000,400, quantum_system.dimension)
     E = quantum_system.E_loc(alpha, prob_dens)
     E_ground = expectation_value(E)
     deriv_E = 2*(expectation_value(E*quantum_system.der_ln_twf(alpha, prob_dens) - E_ground*expectation_value(quantum_system.der_ln_twf(alpha,prob_dens))))
@@ -37,10 +37,10 @@ def minimization_alpha(quantum_system):
          
     """
 
-    gamma = 0.1
+    gamma = 0.5
     tol = 0.001
     max_it = 1000
-    alpha_min = 0.20
+    alpha_min = 1.2
     difference = 1.2
     i = 0
     E_ground = []
