@@ -5,15 +5,15 @@ def expectation_value(E_loc):
     E = (1/len(E_loc))*np.sum(E_loc)
     return(E)
 
-def derivative_E(alpha, quantum_system):
+def derivative_E(alpha, quantum_system, N, n_walkers):
     f = lambda R: quantum_system.trial_wave_function(alpha, R)
-    prob_dens = metropolis(f,30000,40)
+    prob_dens = metropolis(f,N,n_walkers, quantum_system.dimension)
     E = quantum_system.E_loc(alpha, prob_dens)
     E_ground = expectation_value(E)
     deriv_E = 2*(expectation_value(E*quantum_system.der_ln_twf(alpha, prob_dens) - E_ground*expectation_value(quantum_system.der_ln_twf(alpha,prob_dens))))
     return(deriv_E, E_ground)
 
-def minimization_alpha(quantum_system):
+def minimization_alpha(quantum_system, N, n_walkers):
     """
     Finds the alpha for which the local energy is minimal, using a simple 
     damped steepest decent method.
@@ -37,7 +37,7 @@ def minimization_alpha(quantum_system):
          
     """
 
-    gamma = 0.1
+    gamma = 0.5
     tol = 0.001
     max_it = 1000
     alpha_min = 1.2
@@ -49,7 +49,7 @@ def minimization_alpha(quantum_system):
 
     while abs(difference) >= tol and i < max_it:
         keep = alpha_min
-        der_E, E_ground = derivative_E(alpha_min, quantum_system)
+        der_E, E_ground = derivative_E(alpha_min, quantum_system, N, n_walkers)
         alpha_min = alpha_min - gamma * der_E
         alpha_array.append(alpha_min)
         difference = alpha_min - keep

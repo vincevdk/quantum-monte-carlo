@@ -54,8 +54,6 @@ class Helium_atom:
         r12_unit = r1_unit - r2_unit
         r12 = np.linalg.norm(r[:3,:] - r[3:,:], axis = 0)
         E_loc = -4 + np.sum(r12_unit * (r[:3,:] - r[3:,:]), axis = 0) * 1/(r12*(1+alpha*r12)**2) - 1/(r12*(1+alpha*r12)**3) - 1/(4*(1+alpha*r12)**4) + 1/r12
-        print(E_loc.shape,'shape')
-
         return(E_loc)
     
     def der_ln_twf(self, alpha, r):

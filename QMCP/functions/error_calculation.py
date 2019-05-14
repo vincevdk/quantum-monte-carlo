@@ -76,5 +76,4 @@ def bootstrap(N_data_points, n_iterations):
 
 def variance(E_loc):
     var = (1/len(E_loc))*np.sum(E_loc**2,axis = 1) - ((1/len(E_loc))*np.sum(E_loc, axis = 1))**2
-    print(var.shape,'shape variance')
     return(var)

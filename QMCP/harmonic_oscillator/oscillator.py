@@ -39,7 +39,6 @@ class Oscillator:
         """
         E_loc = (alpha + (R**2)*(0.5 - 2*alpha**2))
         E_loc = np.reshape(E_loc, E_loc.shape[1])
-        print(E_loc.shape, 'shape')
         return(E_loc)
 
     def der_ln_twf(self,alpha,R):
