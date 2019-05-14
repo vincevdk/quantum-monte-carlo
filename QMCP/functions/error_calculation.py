@@ -1,6 +1,6 @@
 import numpy as np
 
-def select_random_set(data_points, n_iterations):
+def select_random_set(data_points, n_iterations, blocksize):
     """ Chooses a random set from  N data points of size : "set_size" where 
     a single point can be chosen several times. Does this "n_iterations" 
     times.
@@ -18,7 +18,7 @@ def select_random_set(data_points, n_iterations):
     """
     random_data_points = np.random.choice(data_points, 
                                           size = (n_iterations, 
-                                                  1000))
+                                                  blocksize))
     return(random_data_points)
 
 def calculate_standard_deviation(average_random_set, n_iterations):
@@ -62,12 +62,12 @@ def bootstrap(N_data_points, n_iterations):
     standard_deviation: float
        calculated using the following formula σA​= (⟨A**2⟩−⟨A⟩**2)**0.5
     """
-
-    random_set = select_random_set(N_data_points, n_iterations)
+    blocksize = 10000
+    random_set = select_random_set(N_data_points, n_iterations, blocksize)
     var_vec = variance(random_set)
     var_average = np.sum(var_vec)/n_iterations
     var_standard_deviation = calculate_standard_deviation(var_vec, n_iterations)
-    average_random_set = np.sum(random_set, axis = 1)/1000
+    average_random_set = np.sum(random_set, axis = 1)/blocksize
     energy_standard_deviation = calculate_standard_deviation(average_random_set,
                                                       n_iterations)
     return(energy_standard_deviation, var_average, var_standard_deviation)

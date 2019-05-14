@@ -23,7 +23,7 @@ def vmc(alpha, quantum_system, N, n_walkers):
         prob_dens = metropolis(f,N,n_walkers,quantum_system.dimension)
         E = quantum_system.E_loc(alpha[i], prob_dens)
 
-        E_ground_error[i], var[i], var_error[i] = bootstrap(E,1000)
+        E_ground_error[i], var[i], var_error[i] = bootstrap(E,20000)
         E_ground[i] = expectation_value(E)
 
     return(E_ground, E_ground_error, var, var_error)
