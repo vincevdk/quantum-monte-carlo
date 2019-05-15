@@ -7,7 +7,7 @@ N = 30000 # number of steps
 n_walkers = 400 # number of walkers
 
 hydrogen = Hydrogen_atom(3)
-alpha = np.arange(0.8, 1.3, 0.1)
+alpha = np.arange(0.8, 1.2, 0.05)
 
 E_ground, E_ground_error, variance, var_error = vmc(alpha, hydrogen, N, n_walkers)
 
