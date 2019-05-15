@@ -13,9 +13,9 @@ def vmc(alpha, quantum_system, N, n_walkers):
         f = lambda R: quantum_system.trial_wave_function(alpha[i],R)
         prob_dens = metropolis(f,N,n_walkers,quantum_system.dimension)
         E = quantum_system.E_loc(alpha[i], prob_dens)
-
-        E_ground_error[i], var[i], var_error[i] = bootstrap(E,15000)
+        E_ground_error[i], var[i], var_error[i] = bootstrap(E,10000)
         E_ground[i] = np.mean(E)
+        print(E_ground[i], 'E_ground')
         
     return(E_ground, E_ground_error, var, var_error)
 

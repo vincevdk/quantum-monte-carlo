@@ -52,6 +52,7 @@ def minimization_alpha(quantum_system, N, n_walkers):
         alpha_array.append(alpha_min)
         difference = alpha_min - keep
         i += 1
+        print(alpha_min, "alpha")
 
     print("minimum alpha = ", alpha_min)
     return(alpha_array)

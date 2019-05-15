@@ -53,4 +53,4 @@ class Oscillator:
         -------
         -R**2: function with one variable
         """
-        return(-R**2)
+        return(-np.power(R,2))

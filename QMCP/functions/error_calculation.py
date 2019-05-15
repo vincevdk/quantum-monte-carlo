@@ -47,7 +47,7 @@ def bootstrap(N_data_points, n_iterations):
     var_standard_deviation:
     
     """
-    blocksize = 20000
+    blocksize = 10000
 
     random_set = select_random_set(N_data_points, n_iterations, blocksize)
 
