@@ -1,16 +1,14 @@
 import numpy as np
 from QMCP.functions import metropolis
 
-def expectation_value(E_loc):
-    E = (1/len(E_loc))*np.sum(E_loc)
-    return(E)
 
 def derivative_E(alpha, quantum_system, N, n_walkers):
     f = lambda R: quantum_system.trial_wave_function(alpha, R)
     prob_dens = metropolis(f,N,n_walkers, quantum_system.dimension)
     E = quantum_system.E_loc(alpha, prob_dens)
-    E_ground = expectation_value(E)
-    deriv_E = 2*(expectation_value(E*quantum_system.der_ln_twf(alpha, prob_dens) - E_ground*expectation_value(quantum_system.der_ln_twf(alpha,prob_dens))))
+
+    E_ground = np.mean(E)
+    deriv_E = 2*(np.mean(E*quantum_system.der_ln_twf(alpha, prob_dens) - E_ground*np.mean(quantum_system.der_ln_twf(alpha,prob_dens))))
     return(deriv_E, E_ground)
 
 def minimization_alpha(quantum_system, N, n_walkers):
@@ -53,7 +51,6 @@ def minimization_alpha(quantum_system, N, n_walkers):
         alpha_min = alpha_min - gamma * der_E
         alpha_array.append(alpha_min)
         difference = alpha_min - keep
-        print(alpha_min, 'alpha')
         i += 1
 
     print("minimum alpha = ", alpha_min)

@@ -38,7 +38,7 @@ class Oscillator:
         E_loc: function with two variables
         """
         E_loc = (alpha + (R**2)*(0.5 - 2*alpha**2))
-        E_loc = np.reshape(E_loc, E_loc.shape[1])
+#        E_loc = np.reshape(E_loc, E_loc.shape[1])
         return(E_loc)
 
     def der_ln_twf(self,alpha,R):
@@ -53,4 +53,4 @@ class Oscillator:
         -------
         -R**2: function with one variable
         """
-        return(-R**2)
+        return(-np.power(R,2))

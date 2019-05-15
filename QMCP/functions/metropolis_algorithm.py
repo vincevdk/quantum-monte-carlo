@@ -2,6 +2,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def metropolis(function, N, n_walkers, dim):
+    """
+    Obtains a sequence of random samples from a probability distribution 
+    from which direct sampling is difficult. 
+
+    Parameters
+    ----------
+    function: function
+    N:
+    n_walkers:
+    dim
+       
+    Results
+    -------   
+    rn:
+    """
+
     rn = np.zeros((dim, N, n_walkers))
     r = np.random.randn(dim, n_walkers)
     

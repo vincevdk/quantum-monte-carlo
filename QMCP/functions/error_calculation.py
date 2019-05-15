@@ -59,19 +59,21 @@ def bootstrap(N_data_points, n_iterations):
 
     Results:                                      
     --------  
-    standard_deviation: float
+    energy_standard_deviation: float
        calculated using the following formula σA​= (⟨A**2⟩−⟨A⟩**2)**0.5
+    var_average:
+    var_standard_deviation:
+    
     """
     blocksize = 10000
+
     random_set = select_random_set(N_data_points, n_iterations, blocksize)
-    var_vec = variance(random_set)
-    var_average = np.sum(var_vec)/n_iterations
+
+    var_vec = np.var(random_set,axis=1)
+    var_average = np.sum(var_vec)/len(var_vec)
     var_standard_deviation = calculate_standard_deviation(var_vec, n_iterations)
     average_random_set = np.sum(random_set, axis = 1)/blocksize
     energy_standard_deviation = calculate_standard_deviation(average_random_set,
                                                       n_iterations)
     return(energy_standard_deviation, var_average, var_standard_deviation)
 
-def variance(E_loc):
-    var = (1/len(E_loc))*np.sum(E_loc**2,axis = 1) - ((1/len(E_loc))*np.sum(E_loc, axis = 1))**2
-    return(var)
