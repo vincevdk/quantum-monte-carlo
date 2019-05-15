@@ -54,7 +54,6 @@ def bootstrap(N_data_points, n_iterations):
     var_vec = np.var(random_set,axis=1)
     var_average = np.mean(var_vec)
     var_standard_deviation = np.std(var_vec)
-#    var_standard_deviation = calculate_standard_deviation(var_vec, n_iterations)
     average_random_set = np.mean(random_set, axis = 1)
     energy_standard_deviation = np.std(average_random_set)
     energy_standard_deviation = np.std(average_random_set)
