@@ -38,11 +38,11 @@ class Helium_atom:
          ----------
          alpha: int
              variable input, is being changed to find the minimal energy
-         r: matrix of shape 6 x N x n_walkers
+         r: matrix of shape 6 x (N*n_walkers-n_walkers*4000)
              N , number of steps
              n_walkers , number of walkers
-             :3 x N x n_walkers , distance between proton and electron 1
-             3: x N x n_walkers , distance between proton and electron 2
+             :3 x (N*n_walkers-n_walkers*4000) , distance between proton and electron 1
+             3: x (N*n_walkers-n_walkers*4000) , distance between proton and electron 2
 
          Results
          -------

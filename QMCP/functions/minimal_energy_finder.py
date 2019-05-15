@@ -3,10 +3,25 @@ from QMCP.functions import metropolis
 
 
 def derivative_E(alpha, quantum_system, N, n_walkers):
+    """ function which calculates the derivative of the energy with respect to alpha
+    Parameters:
+    ----------
+    alpha: int
+    quantum_system: class with properties dimensions
+        modules: trial_wave_function, E_loc, der_ln_twf
+    N: int
+    n_walkers: int
+    
+    Results:
+    ---------
+    deriv_E: int
+        derivative of E with respect to alpha
+    E_ground: int
+    
+    """
     f = lambda R: quantum_system.trial_wave_function(alpha, R)
     prob_dens = metropolis(f,N,n_walkers, quantum_system.dimension)
     E = quantum_system.E_loc(alpha, prob_dens)
-
     E_ground = np.mean(E)
     deriv_E = 2*(np.mean(E*quantum_system.der_ln_twf(alpha, prob_dens) - E_ground*np.mean(quantum_system.der_ln_twf(alpha,prob_dens))))
     return(deriv_E, E_ground)
@@ -17,17 +32,11 @@ def minimization_alpha(quantum_system, N, n_walkers):
     damped steepest decent method.
     Parameters
     ----------
-    trial_function: function 
-        parametrised (trial)wave function of a quantum system 
-    E_loc: function
-        Local energy is a function that depends on the positions of the particles
-        and alpha
-    der_ln_twf: function
-        alpha derivative of the natural logarithm of the trial wave function,    
-        needed to calculate the alpha derivative of the energy 
-    dimension: int
+    quantum_system: class with properties dimensions
+        modules: trial_wave_function, E_loc, der_ln_twf
+    N: int
+    n_walkers: int
         
-
     Results
     -------
     alpha_array: array of size i

@@ -9,13 +9,15 @@ def metropolis(function, N, n_walkers, dim):
     Parameters
     ----------
     function: function
-    N:
-    n_walkers:
-    dim
+    N: int
+    n_walkers: int
+    dim: int
        
     Results
     -------   
-    rn:
+    rn: matrix of shape dim x (N*n_walkers-n_walkers*4000)
+            N , number of steps
+            n_walkers , number of walkers
     """
 
     rn = np.zeros((dim, N, n_walkers))

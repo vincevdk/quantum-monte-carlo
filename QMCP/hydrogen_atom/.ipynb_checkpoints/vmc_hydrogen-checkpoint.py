@@ -21,7 +21,7 @@ plt.figure()
 plt.errorbar(alpha, variance, yerr=var_error)
 plt.title('variance')
 plt.xlabel(r'$\alpha$')
-plt.ylabel(r'$\sigma$^2')
+plt.ylabel(r'$\sigma^2$')
 plt.show()
 
 
